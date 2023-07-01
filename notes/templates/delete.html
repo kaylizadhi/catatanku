@@ -1,0 +1,17 @@
+{% extends "base.html" %} {% block meta %}
+<title>Catatanku | Delete</title>
+{% endblock meta %} {% block content %}
+<div class="relative overflow-x-auto mx-24">
+
+    <div class="main">
+        <form method="POST">
+
+            {% csrf_token %}
+            Are you want to delete this note?
+            <input type="submit" value="Yes" />
+            <a href="/">Cancel </a>
+        </form>
+    </div>
+
+</div>
+{% endblock content %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %} 
+
+{% load static %}
+
+{% block custom_css %}
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="../static/notes/styles.css">
+<script src="..static/js/script.js"></script>
+{% endblock custom_css %}
+
+{% block meta %}
+<title>Catatanku</title>
+{% endblock meta %} 
+
+{% block content %}
+<div class="main">
+
+    <div class="relative overflow-x-auto mx-24">
+
+        {% for data in dataset %}.
+
+        <a href="/notes/{{ data.id }}">{{ data.title }}</a><br />
+        <hr />
+
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,76 @@
+<script>
+    $(document).ready(function () {
+      const hamburgerIcon = `<svg id="hamburgerIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+    </svg>`;
+      const xIcon = `<svg id="xIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+    `;
+      $("#toggle-button").click(function () {
+        if ($("#navbar-default").hasClass("hidden")) {
+          $("#navbar-default").removeClass("hidden");
+          $("#hamburgerIcon").remove();
+          $("#toggle-button").append(xIcon);
+        } else {
+          $("#navbar-default").addClass("hidden");
+          $("#toggle-button").append(hamburgerIcon);
+          $("#xIcon").remove();
+        }
+      });
+    });
+  </script>
+  <nav
+    class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 md:py-0 shadow-lg z-20"
+  >
+    <div class="container flex flex-wrap justify-between items-center mx-auto">
+      <a href="/notes" class="flex items-center">
+        <span class="self-center text-xl font-semibold whitespace-nowrap">
+          Catatanku
+        </span>
+      </a>
+      <button
+        data-collapse-toggle="navbar-default"
+        id="toggle-button"
+        type="button"
+        class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-gray-200"
+        aria-controls="navbar-default"
+        aria-expanded="false"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6"
+          id="hamburgerIcon"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+          />
+        </svg>
+      </button>
+      <div
+        class="hidden w-full absolute top-10 left-0 md:static md:block md:w-auto rounded-xl shadow-xl md:rounded-none md:shadow-transparent"
+        id="navbar-default"
+      >
+        <ul
+          class="flex flex-col px-4 pb-4 pt-0 md:pt-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white"
+        >
+          <!-- </li>
+          <div class="text-red-400 pl-3 p-2">
+            <a href=""> Create </a>
+          </div> -->
+          <div
+            class="bg-red-400 text-white rounded-lg pl-3 md:pl-2 p-2 text-center"
+          >
+            <a href="/notes/create"> Create </a>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
