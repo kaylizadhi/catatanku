@@ -13,16 +13,92 @@
 {% endblock meta %} 
 
 {% block content %}
+<div class="relative overflow-x-auto mx-24">
+
+    <form method="POST" id="note-form">
+
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label>Title</label>
+            <input type="text" id="note-title" class="form-control" name="title">
+             </div>
+        <div class="form-group">
+            <label>Text</label>
+             <textarea class="form-control" id="note-text" rows="3" name="text"></textarea>
+             </div>
+        <div class="bg-red-400 text-white rounded-lg pl-3 md:pl-2 p-2 text-center">
+            <input type="submit" value="Create">
+        </div>
+
+    </form>
+</div>
+
 <div class="main">
 
     <div class="relative overflow-x-auto mx-24">
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Daftar Catatan</th>
+                <th scope="col">[action]</th>
+              </tr>
+            </thead>
+            <tbody id="note-table">
+                {% for data in dataset %}
 
-        {% for data in dataset %}.
+                <tr>
+                    <td>
+                        {{ data.title }}            
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-primary" href="/notes/{{ data.id }}">Lihat</a>
+                    </td>
+                </tr>
 
-        <a href="/notes/{{ data.id }}">{{ data.title }}</a><br />
-        <hr />
+                {% endfor %}
+            </tbody>
+          </table>
 
-        {% endfor %}
     </div>
 </div>
+
+<!-- https://realpython.com/django-and-ajax-form-submissions -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#note-form').on('submit', function(event) {
+        event.preventDefault();
+        console.log("tes")
+        create_note()
+    })
+// insert semua code di script disini
+console.log("brou")
+    function create_note() {
+        $.ajax({
+        url : "created", // the endpoint
+        type : "POST", // http method,  
+        data : { "csrfmiddlewaretoken": "{{csrf_token}}", note_title : $('#note-title').val(), note_text : $('#note-text').val() }, // data sent with the post request
+
+        // handle a successful response
+        success : function(json) {
+            console.log(json.title)
+            $('#note-table').prepend("<tr><td>"+ json.title +"</td><td><a class='btn btn-outline-primary' href='/notes/{{ "+ json.noteid +" }}'>"+ "Lihat" +"</a></td></tr>")
+        },
+
+        // handle a non-successful response
+        // error : function(xhr,errmsg,err) {
+        //     $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+        //         " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+        //     console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+        // }
+    });
+    };
+    
+
+});
+
+        
+</script>
 {% endblock content %}
+
