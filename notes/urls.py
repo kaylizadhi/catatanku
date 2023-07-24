@@ -8,6 +8,7 @@ urlpatterns = [
     path('json', show_json),
     path('post', post_note),
     path('delete-post', delete_flutter),
+    path('put', update_flutter),
     path('<id>', read),
     path('<id>/update', update),
     path('<id>/delete', delete),

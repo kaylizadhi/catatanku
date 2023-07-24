@@ -75,6 +75,17 @@ def delete_flutter(request):
     
     return HttpResponseRedirect("/notes")
 
+@csrf_exempt
+def update_flutter(request):
+    if (request.method == "PUT"):
+        request_data = request.body
+        pk = json.loads(request_data.decode('utf-8'))['pk']
+        note = MyNotes.objects.get(id=pk)
+        for key, value in request_data.items():
+            setattr(note, key, value)
+        note.save()
+        return HttpResponseRedirect("/notes")
+
 def read(request, id):
     context = {}
 
