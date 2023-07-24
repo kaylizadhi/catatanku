@@ -3,6 +3,21 @@
 {% endblock meta %} {% block content %}
 <div class="relative overflow-x-auto mx-24">
 
+<div class="card">
+    <div class="card-header">
+      {{ data.date }}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{ data.title }}</h5>
+      <p class="card-text">{{ data.text }}</p>
+      <a href="/notes/{{ data.id }}/update" class="btn btn-primary">Edit</a>
+      <a href="/notes/{{ data.id }}/delete" class="btn btn-primary">Delete</a>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="relative overflow-x-auto mx-24">
+
     <div class="main">
 
         {{ data.title }}<br />
@@ -18,5 +33,5 @@
             Delete
         </a>
     </div>
-</div>
+</div> -->
 {% endblock content %}

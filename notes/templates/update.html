@@ -3,17 +3,22 @@
 {% endblock meta %} {% block content %}
 <div class="relative overflow-x-auto mx-24">
 
-    <div class="main">
-        <form method="POST">
+    <form method="POST" id="note-form">
 
-            {% csrf_token %}
+        {% csrf_token %}
 
-            {{ form.as_p }}
-
+        <div class="form-group">
+            <label>Title</label>
+            <input type="text" id="note-title" class="form-control" name="title"> {{ data.title }}
+             </div>
+        <div class="form-group">
+            <label>Text</label>
+             <textarea class="form-control" id="note-text" rows="3" name="text">{{ data.text }}</textarea>
+             </div>
+        <div class="bg-red-400 text-white rounded-lg pl-3 md:pl-2 p-2 text-center">
             <input type="submit" value="Update">
-        </form>
+        </div>
 
-    </div>
-
+    </form>
 </div>
 {% endblock content %}
